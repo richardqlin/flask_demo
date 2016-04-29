@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Episode 5</title>
+
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<script type='text/javascript' src='/static/jquery-1.7.1.min.js'></script>
+</head>
+<body>
+	<div id='content'>
+		{% block body %} {% endblock %}
+	</div>
+	<div id='nav'>
+		Navigation:<br />
+		<ul>
+			{% block nav %} {% endblock %}
+			<li><a href="{{url_for('main')}}">Index</a></li>
+			<li><a href="/about/">about</a></li>
+			<li><a href="/contact">contact</a></li>
+			<hr id='nav' />
+
+			{% if 'username' in session %}
+
+			<li><a href="{{url_for('remote')}}">Remote control </a></li>
+			<li><a href="{{url_for('music')}}">Music</a></li>
+			<li><a href="{{url_for('login')}}">logout</a></li>
+			{% else %}
+			<li><a href="{{url_for('login')}}">Login</a></li>
+			{% endif %}
+		</ul>
+	</div>
+	<div id='flashed'>
+		{% with messages=get_flashed_messages() %}
+		{% if messages %}
+			Results:
+			<pre>
+				{% for message in messages %}
+{{ message }}
+				{% endfor %}
+			</pre>
+		{% endif %}
+	{% endwith %}
+	</div>
+ 		
+</body>
+</html>
